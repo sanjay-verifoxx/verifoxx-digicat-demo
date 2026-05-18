@@ -10,8 +10,10 @@
   ];
 
   const state = {
+    mode: "use-case",
     useCaseKey: "intervention",
     screenIndex: 0,
+    sidebarCollapsed: true,
     selectedLayer: "combined",
     processingProgress: 0,
     modal: null
@@ -26,12 +28,35 @@
   }
 
   function setUseCase(key) {
+    state.mode = "use-case";
     state.useCaseKey = key;
     state.screenIndex = 0;
+    state.sidebarCollapsed = true;
     state.selectedLayer = "combined";
     state.processingProgress = 0;
     state.modal = null;
     clearProcessingTimer();
+    render();
+  }
+
+  function setMode(mode, useCaseKey) {
+    clearProcessingTimer();
+    state.modal = null;
+    state.sidebarCollapsed = true;
+
+    if (mode === "contact") {
+      state.mode = "contact";
+      render();
+      return;
+    }
+
+    state.mode = "use-case";
+    if (useCaseKey && useCaseKey !== state.useCaseKey) {
+      state.useCaseKey = useCaseKey;
+      state.screenIndex = 0;
+      state.selectedLayer = "combined";
+      state.processingProgress = 0;
+    }
     render();
   }
 
@@ -56,6 +81,13 @@
       clearProcessingTimer();
       render();
     }
+  }
+
+  function backToBefore() {
+    state.screenIndex = 1;
+    state.modal = null;
+    clearProcessingTimer();
+    render();
   }
 
   function restartDemo() {
@@ -126,11 +158,21 @@
       case "select-use-case":
         setUseCase(actionEl.getAttribute("data-use-case"));
         break;
+      case "select-mode":
+        setMode(actionEl.getAttribute("data-mode"), actionEl.getAttribute("data-use-case"));
+        break;
+      case "toggle-sidebar":
+        state.sidebarCollapsed = !state.sidebarCollapsed;
+        render();
+        break;
       case "next-screen":
         nextScreen();
         break;
       case "prev-screen":
         prevScreen();
+        break;
+      case "back-to-before":
+        backToBefore();
         break;
       case "restart-demo":
         restartDemo();
@@ -153,12 +195,44 @@
 
   function getMapPalette(layer) {
     if (layer === "left") {
-      return ["#e7f0ff", "#2f6ff2"];
+      return ["#edf4ff", "#2563eb"];
     }
     if (layer === "right") {
-      return ["#e8f7ef", "#2bb673"];
+      return ["#edf9f2", "#1f9d68"];
     }
-    return ["#ebe7ff", "#6957f5"];
+    return ["#f1ecff", "#5b48f5"];
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function getRegionValues(useCase, layer) {
+    const left = useCase.after.regions.left || {};
+    const right = useCase.after.regions.right || {};
+
+    if (layer === "left") {
+      return left;
+    }
+
+    if (layer === "right") {
+      return right;
+    }
+
+    const codes = new Set([...Object.keys(left), ...Object.keys(right)]);
+    const combined = {};
+
+    for (const code of codes) {
+      const leftValue = left[code] ?? 0;
+      const rightValue = right[code] ?? 0;
+      const overlap = Math.min(leftValue, rightValue);
+      const imbalancePenalty = Math.abs(leftValue - rightValue) * 0.08;
+      const synergyBonus = overlap > 0.32 ? 0.16 + overlap * 0.12 : overlap * 0.08;
+      const weighted = (leftValue * 0.46) + (rightValue * 0.46) + synergyBonus - imbalancePenalty;
+      combined[code] = clamp(Number(weighted.toFixed(3)), 0.08, 0.95);
+    }
+
+    return combined;
   }
 
   function normalizeUkFeatures() {
@@ -214,7 +288,7 @@
 
     const useCase = currentUseCase();
     const layer = state.selectedLayer;
-    const regionValues = useCase.after.regions[layer] || {};
+    const regionValues = getRegionValues(useCase, layer);
     const [lightColor, strongColor] = getMapPalette(layer);
 
     normalizeUkFeatures().then((geojson) => {
@@ -255,7 +329,8 @@
         .append("title")
         .text((feature) => {
           const score = regionValues[feature.properties.regionCode] ?? 0.12;
-          return `${feature.properties.regionName}: ${Math.round(score * 100)} intensity`;
+          const label = layer === "combined" ? "joined-up signal score" : "approved indicator score";
+          return `${feature.properties.regionName}: ${Math.round(score * 100)} ${label}`;
         });
     }).catch(() => {
       container.innerHTML = '<div class="map-loading">Unable to load the UK boundary layer right now.</div>';
@@ -264,8 +339,24 @@
 
   function render() {
     const screenKey = screenKeys[state.screenIndex];
-    const template = screens[screenKey];
-    root.innerHTML = template(currentUseCase(), state, components) + components.renderModal(state.modal);
+    const template = state.mode === "contact" ? screens.contact : screens[screenKey];
+    const content = state.mode === "contact"
+      ? template(state, components)
+      : template(currentUseCase(), state, components);
+
+    root.innerHTML = `
+      <div class="app-layout ${state.sidebarCollapsed ? "sidebar-collapsed" : ""}">
+        ${components.renderSidebar({
+          mode: state.mode,
+          useCaseKey: state.useCaseKey,
+          collapsed: state.sidebarCollapsed
+        })}
+        <main class="app-main">
+          ${content}
+        </main>
+      </div>
+      ${components.renderModal(state.modal)}
+    `;
     renderChoroplethMap();
   }
 

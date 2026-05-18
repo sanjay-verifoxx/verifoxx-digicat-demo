@@ -7,8 +7,6 @@ window.PETSDemoScreens.screen5 = (useCase, state, components) => {
     <section class="screen-frame">
       ${components.renderTopbar({ screenNumber: 5, title: match.title, useCaseKey: state.useCaseKey })}
       <div class="screen-content">
-        <div class="match-tag">Secure Match ID: ${components.escapeHtml(match.matchId)}</div>
-
         <div class="before-after-section">
           <div class="mini-section-title">${components.escapeHtml(match.beforeLabel)}</div>
           <div class="triple-grid">
@@ -58,8 +56,13 @@ window.PETSDemoScreens.screen5 = (useCase, state, components) => {
           </div>
         </div>
 
+        <div class="footer-banner">
+          <strong>${components.escapeHtml(match.dataBoundaryTitle)}</strong>
+          <div class="small-note">${components.escapeHtml(match.dataBoundaryBody)}</div>
+        </div>
+
         <div class="cta-row">
-          <span></span>
+          <button class="ghost-button" data-action="prev-screen">Back</button>
           <button class="primary-button" data-action="next-screen">View Drill-Down →</button>
         </div>
       </div>

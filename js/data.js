@@ -7,17 +7,18 @@ window.PETSDemoData = {
       topbarTitle: "PETs Educational Demo Space",
       poweredBy: "Powered by Verifoxx",
       landing: {
-        heroTitle: "PETs Educational Demo Space",
-        heroDescription: "Explore how organisations can securely collaborate and generate joined-up insights without exposing sensitive personal data.",
-        supportingText: "Privacy Enhancing Technologies (PETs) enable secure collaboration and better outcomes.",
+        eyebrow: "Use Case #1",
+        heroTitle: "Identifying vulnerable people using two distinct datasets",
+        heroDescription: "This use case looks at how highly sensitive personal data can help different public sector teams collaborate and provide better public services, all without any data leaving either organisation.",
+        supportingText: "Linking data without moving data helps boost early intervention while records stay within each organisation's own environment.",
         explore: [
           "How fragmented signals can limit intervention opportunities",
           "How Privacy Enhancing Technologies (PETs) enable secure collaboration",
           "How repeat interaction patterns can be identified earlier",
           "How organisations can generate insights without exposing raw personal records"
         ],
-        useCaseTitle: "Early Intervention Signals",
-        useCaseBody: "Health Service and Social Services each hold different indicators relating to individuals requiring support.\n\nPETs enable approved indicators to be securely connected, improving visibility of repeat interactions and earlier intervention opportunities.",
+        useCaseTitle: "Identifying Vulnerable People",
+        useCaseBody: "The health service and social services each hold different datasets on vulnerable people. Because data is not connected, each authority does not have the full picture, meaning a person's situation could be worse than it appears.\n\nA better service could be provided with earlier intervention if approved indicators were linked without moving the underlying data.",
         benefits: [
           "Secure collaboration without sharing personal data",
           "Stronger visibility of at-risk individuals",
@@ -28,8 +29,8 @@ window.PETSDemoData = {
       },
       before: {
         title: "BEFORE PETs — Fragmented Signals",
-        pageTitle: "Early Intervention Signals",
-        subtitle: "Fragmented visibility across organisations",
+        pageTitle: "Identifying Vulnerable People",
+        subtitle: "Linking data without moving data, to boost early intervention",
         filter: "Last 1 Month",
         left: {
           name: "Health Service",
@@ -82,7 +83,7 @@ window.PETSDemoData = {
           "Generating intervention insights"
         ],
         footerTitle: "Your data remains secure.",
-        footerBody: "Only approved, privacy-safe insights are generated."
+        footerBody: "Only approved, privacy-safe insights are generated. Data stays within each organisation's own secure environment."
       },
       after: {
         title: "AFTER PETs — Joined-Up Intervention Insights",
@@ -102,46 +103,32 @@ window.PETSDemoData = {
         },
         regions: {
           left: {
-            UKC: 0.34,
-            UKD: 0.48,
-            UKE: 0.5,
-            UKF: 0.44,
-            UKG: 0.62,
-            UKH: 0.36,
-            UKI: 0.74,
-            UKJ: 0.32,
-            UKK: 0.28,
-            UKL: 0.3,
-            UKM: 0.42,
-            UKN: 0.2
+            UKC: 0.22,
+            UKD: 0.58,
+            UKE: 0.46,
+            UKF: 0.28,
+            UKG: 0.68,
+            UKH: 0.24,
+            UKI: 0.82,
+            UKJ: 0.18,
+            UKK: 0.14,
+            UKL: 0.26,
+            UKM: 0.38,
+            UKN: 0.12
           },
           right: {
-            UKC: 0.2,
-            UKD: 0.28,
-            UKE: 0.34,
-            UKF: 0.46,
-            UKG: 0.58,
-            UKH: 0.3,
-            UKI: 0.38,
-            UKJ: 0.24,
-            UKK: 0.2,
-            UKL: 0.42,
-            UKM: 0.5,
-            UKN: 0.26
-          },
-          combined: {
-            UKC: 0.36,
-            UKD: 0.52,
-            UKE: 0.58,
-            UKF: 0.52,
-            UKG: 0.76,
-            UKH: 0.42,
-            UKI: 0.68,
-            UKJ: 0.34,
-            UKK: 0.38,
-            UKL: 0.48,
-            UKM: 0.54,
-            UKN: 0.3
+            UKC: 0.12,
+            UKD: 0.22,
+            UKE: 0.28,
+            UKF: 0.54,
+            UKG: 0.42,
+            UKH: 0.18,
+            UKI: 0.34,
+            UKJ: 0.22,
+            UKK: 0.16,
+            UKL: 0.58,
+            UKM: 0.62,
+            UKN: 0.24
           }
         },
         breakdown: [
@@ -164,7 +151,6 @@ window.PETSDemoData = {
       },
       match: {
         title: "SECURE MATCH EXPLANATION — Why This Person Was Highlighted",
-        matchId: "MATCH-001",
         beforeLabel: "Before PETs",
         leftTitle: "Health Service sees:",
         leftBody: "3 injury-related emergency visits in 6 weeks",
@@ -184,11 +170,12 @@ window.PETSDemoData = {
         whyTitle: "Why this matters",
         whyBody: "The joined-up view suggests escalating vulnerability that was not obvious from either dataset alone.",
         privacyTitle: "Privacy note",
-        privacyBody: "Personal identifiers remain protected. Only approved indicators are connected."
+        privacyBody: "Personal identifiers remain protected. Only approved indicators are connected.",
+        dataBoundaryTitle: "Data stays within each organisation's environment",
+        dataBoundaryBody: "Underlying records do not leave the organisation that holds them. Only approved indicators are used to generate the joined-up view."
       },
       drilldown: {
         title: "VIEW INDICATORS BEHIND THIS MATCH",
-        matchId: "MATCH-001",
         leftTitle: "Health Service indicator",
         leftBody: "3 injury-related emergency visits in 6 weeks",
         leftPriority: "Medium",
@@ -208,7 +195,8 @@ window.PETSDemoData = {
         ],
         resultTitle: "Result",
         resultBody: "The combined picture supports a coordinated safeguarding review.",
-        footer: "All personal identifiers remain protected at all times."
+        footer: "All personal identifiers remain protected at all times.",
+        dataBoundaryBody: "Underlying records remain within each organisation's own environment throughout the matching process."
       }
     },
     operational: {
@@ -218,9 +206,10 @@ window.PETSDemoData = {
       topbarTitle: "PETs Educational Demo Space",
       poweredBy: "Powered by Verifoxx",
       landing: {
-        heroTitle: "PETs Educational Demo Space",
-        heroDescription: "Explore how organisations can securely collaborate and generate joined-up insights without exposing sensitive operational data.",
-        supportingText: "Privacy Enhancing Technologies (PETs) enable secure collaboration and better resilience planning.",
+        eyebrow: "Use Case #2",
+        heroTitle: "Increasing resilience and collaboration across two different sectors",
+        heroDescription: "This use case examines how sensitive operational data across two different critical national infrastructure sectors can be analysed to decrease risk, without any data leaving its owner.",
+        supportingText: "Increased resilience of infrastructure without exposing sensitive data depends on approved indicators, not moving the underlying operational records.",
         explore: [
           "How fragmented operational signals can delay resilience action",
           "How PETs enable secure cross-market collaboration",
@@ -228,7 +217,7 @@ window.PETSDemoData = {
           "How organisations can generate resilience insights without exposing operational systems"
         ],
         useCaseTitle: "Cross-Market Operational Risk",
-        useCaseBody: "Energy and water organisations operate in different markets, but their infrastructure is operationally connected.\n\nPETs enable approved indicators to be securely connected across markets, helping identify where energy disruption could affect water service continuity without exposing sensitive operational data.",
+        useCaseBody: "Energy and water organisations operate in different markets, but their infrastructure is operationally connected.\n\nPETs enable approved indicators to be securely connected across markets, helping increase resilience and collaboration without exposing sensitive data or moving the underlying records from their owners.",
         benefits: [
           "Secure cross-market collaboration",
           "Earlier identification of operational disruption risk",
@@ -273,8 +262,7 @@ window.PETSDemoData = {
         limitations: [
           "Energy Network Operator can identify local supply disruption risks",
           "Water Utility can identify critical water assets and operational dependencies",
-          "BUT cross-market dependencies are difficult to connect securely",
-          "Some risks to water service continuity may not be prioritised early enough"
+          "BUT neither are aware of the other's risks, meaning geographical areas where both have risks should be prioritised and protected"
         ]
       },
       processing: {
@@ -294,15 +282,15 @@ window.PETSDemoData = {
           "Generating operational risk insights"
         ],
         footerTitle: "Operational data remains secure.",
-        footerBody: "Only approved, resilience-focused insights are generated."
+        footerBody: "Only approved, resilience-focused insights are generated. Data stays within each organisation's own secure environment."
       },
       after: {
         title: "AFTER PETs — Joined-Up Cross-Market Insights",
         pageTitle: "Cross-Market Operational Risk",
-        subtitle: "Joined-up visibility generated securely across markets without exposing operational systems.",
+        subtitle: "Increased resilience of infrastructure without exposing sensitive data",
         filter: "Last 1 Month",
         metrics: [
-          { value: "3", label: "Secure cross-market matches identified", icon: "↔", color: "purple" },
+          { value: "3", label: "Mutual critical asset locations", icon: "↔", color: "purple" },
           { value: "1", label: "Critical water asset dependency not previously visible to Energy", icon: "⚠", color: "blue" },
           { value: "2", label: "Recommended resilience actions", icon: "✓", color: "green" }
         ],
@@ -314,46 +302,32 @@ window.PETSDemoData = {
         },
         regions: {
           left: {
-            UKC: 0.54,
-            UKD: 0.66,
-            UKE: 0.58,
-            UKF: 0.42,
-            UKG: 0.6,
-            UKH: 0.4,
-            UKI: 0.3,
-            UKJ: 0.28,
-            UKK: 0.34,
-            UKL: 0.32,
-            UKM: 0.62,
-            UKN: 0.24
+            UKC: 0.72,
+            UKD: 0.68,
+            UKE: 0.52,
+            UKF: 0.24,
+            UKG: 0.46,
+            UKH: 0.2,
+            UKI: 0.12,
+            UKJ: 0.14,
+            UKK: 0.2,
+            UKL: 0.22,
+            UKM: 0.76,
+            UKN: 0.16
           },
           right: {
-            UKC: 0.22,
-            UKD: 0.34,
-            UKE: 0.4,
-            UKF: 0.44,
-            UKG: 0.74,
-            UKH: 0.52,
-            UKI: 0.26,
-            UKJ: 0.2,
-            UKK: 0.28,
-            UKL: 0.48,
-            UKM: 0.56,
-            UKN: 0.2
-          },
-          combined: {
-            UKC: 0.42,
-            UKD: 0.58,
-            UKE: 0.56,
-            UKF: 0.5,
+            UKC: 0.18,
+            UKD: 0.26,
+            UKE: 0.34,
+            UKF: 0.42,
             UKG: 0.82,
-            UKH: 0.58,
-            UKI: 0.36,
-            UKJ: 0.24,
-            UKK: 0.34,
-            UKL: 0.46,
-            UKM: 0.62,
-            UKN: 0.22
+            UKH: 0.56,
+            UKI: 0.16,
+            UKJ: 0.12,
+            UKK: 0.22,
+            UKL: 0.62,
+            UKM: 0.48,
+            UKN: 0.14
           }
         },
         breakdown: [
@@ -376,7 +350,6 @@ window.PETSDemoData = {
       },
       match: {
         title: "SECURE MATCH EXPLANATION — Why This Cross-Market Risk Was Highlighted",
-        matchId: "MATCH-EW-001",
         beforeLabel: "Before PETs",
         leftTitle: "Energy Network Operator sees:",
         leftBody: "Repeated local supply dips in a network zone",
@@ -396,11 +369,12 @@ window.PETSDemoData = {
         whyTitle: "Why this matters",
         whyBody: "The joined-up view suggests that a local energy supply issue could affect a water asset that supports service continuity.",
         privacyTitle: "Sensitivity note",
-        privacyBody: "Sensitive infrastructure details remain protected. Only approved operational indicators are connected."
+        privacyBody: "Sensitive infrastructure details remain protected. Only approved operational indicators are connected.",
+        dataBoundaryTitle: "Operational data stays within each organisation's environment",
+        dataBoundaryBody: "Asset records and operational system details remain with the organisation that owns them. Only approved indicators contribute to the joined-up resilience view."
       },
       drilldown: {
         title: "VIEW INDICATORS BEHIND THIS CROSS-MARKET MATCH",
-        matchId: "MATCH-EW-001",
         leftTitle: "Energy Network indicator",
         leftBody: "Repeated local supply dips in a network zone",
         leftPriority: "Medium",
@@ -420,7 +394,8 @@ window.PETSDemoData = {
         ],
         resultTitle: "Result",
         resultBody: "The combined picture supports a joint resilience review.",
-        footer: "Sensitive operational data remains protected at all times."
+        footer: "Sensitive operational data remains protected at all times.",
+        dataBoundaryBody: "Operational records remain within each organisation's own environment while approved indicators are matched."
       }
     }
   }

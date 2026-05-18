@@ -10,6 +10,21 @@
   <div class="app-shell">
     <div id="app"></div>
   </div>
+  <form name="contact" method="POST" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="contact">
+    <input type="hidden" name="subject" value="Verifoxx demo contact enquiry">
+    <input type="text" name="name">
+    <input type="text" name="organisation">
+    <input type="email" name="email">
+    <select name="reason">
+      <option value="">Select an option</option>
+      <option value="Demo request">Demo request</option>
+      <option value="Partnership enquiry">Partnership enquiry</option>
+      <option value="Product question">Product question</option>
+      <option value="General enquiry">General enquiry</option>
+    </select>
+    <textarea name="message"></textarea>
+  </form>
 
   <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
@@ -22,6 +37,7 @@
   <script defer src="js/screens/screen4.js"></script>
   <script defer src="js/screens/screen5.js"></script>
   <script defer src="js/screens/screen6.js"></script>
+  <script defer src="js/screens/contact.js"></script>
   <script defer src="js/app.js"></script>
 </body>
 </html>

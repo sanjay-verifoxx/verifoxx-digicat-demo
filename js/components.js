@@ -17,20 +17,41 @@ window.PETSDemoComponents = (() => {
     return `<span class="priority-pill ${key}">${escapeHtml(priority)}</span>`;
   }
 
-  function renderTopbar({ screenNumber, title, useCaseKey }) {
-    const interventionActive = useCaseKey === "intervention" ? "is-active" : "";
-    const operationalActive = useCaseKey === "operational" ? "is-active" : "";
+  function renderSidebar({ mode, useCaseKey, collapsed }) {
+    const interventionActive = mode === "use-case" && useCaseKey === "intervention" ? "is-active" : "";
+    const operationalActive = mode === "use-case" && useCaseKey === "operational" ? "is-active" : "";
+    const contactActive = mode === "contact" ? "is-active" : "";
+    const collapsedClass = collapsed ? "is-collapsed" : "";
+
+    return `
+      <aside class="sidebar ${collapsedClass}">
+        <button class="sidebar-toggle" data-action="toggle-sidebar" aria-label="${collapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${collapsed ? "false" : "true"}">
+          <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+        </button>
+        ${collapsed ? "" : `
+          <div class="sidebar-nav">
+            <button class="sidebar-item ${interventionActive}" data-action="select-mode" data-mode="use-case" data-use-case="intervention">
+              <span class="sidebar-item-label">Identifying Vulnerable People</span>
+            </button>
+            <button class="sidebar-item ${operationalActive}" data-action="select-mode" data-mode="use-case" data-use-case="operational">
+              <span class="sidebar-item-label">Cross-Market Risk</span>
+            </button>
+            <button class="sidebar-item ${contactActive}" data-action="select-mode" data-mode="contact">
+              <span class="sidebar-item-label">Contact</span>
+            </button>
+          </div>
+        `}
+      </aside>
+    `;
+  }
+
+  function renderTopbar({ title }) {
     return `
       <div class="topbar">
         <div class="topbar-left">
-          <span class="step-chip">${screenNumber}/6</span>
           <div class="screen-title">${escapeHtml(title)}</div>
         </div>
         <div class="topbar-right">
-          <div class="use-case-switcher" aria-label="Choose use case">
-            <button class="switch-pill ${interventionActive}" data-action="select-use-case" data-use-case="intervention">Early Intervention</button>
-            <button class="switch-pill ${operationalActive}" data-action="select-use-case" data-use-case="operational">Cross-Market Risk</button>
-          </div>
           <div class="powered-by">Powered by <img class="powered-logo-image" src="assets/vfx-logo.png" alt="VFX logo"></div>
         </div>
       </div>
@@ -41,7 +62,6 @@ window.PETSDemoComponents = (() => {
     const rows = org.rows.map((row) => `
       <tr>
         <td>${escapeHtml(row[0])}</td>
-        <td>${escapeHtml(row[1])}</td>
         <td>${escapeHtml(row[2])}</td>
         <td>${priorityPill(row[3])}</td>
       </tr>
@@ -62,17 +82,12 @@ window.PETSDemoComponents = (() => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Repeat</th>
-              <th>Type</th>
+              <th>Signal</th>
               <th>Priority</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
         </table>
-        <div class="card-footer">
-          <strong>${escapeHtml(org.footer)}</strong>
-          <button class="text-link" data-action="open-signals" data-org="${escapeHtml(org.name)}">View Example Signals</button>
-        </div>
       </div>
     `;
   }
@@ -104,7 +119,6 @@ window.PETSDemoComponents = (() => {
       <div class="map-card card rise-in">
         <div class="map-toolbar">
           <div>
-            <div class="mini-section-title">Section title</div>
             <h3 class="card-title">${escapeHtml(title)}</h3>
           </div>
           <div class="toggle-row" aria-label="Map layer toggle">
@@ -117,9 +131,9 @@ window.PETSDemoComponents = (() => {
         </div>
         <div class="heatmap-wrap">
           <div class="heatmap-scale">
-            <div class="legend-label">High</div>
+            <div class="legend-label">Higher</div>
             <div class="scale-bar"></div>
-            <div class="legend-label">Low</div>
+            <div class="legend-label">Lower</div>
           </div>
           <div
             class="uk-map-shell"
@@ -130,7 +144,7 @@ window.PETSDemoComponents = (() => {
             <div class="map-loading">Loading UK regional map…</div>
           </div>
         </div>
-        <div class="map-note">Heat intensity is shown as a presentation-ready hotspot overlay for the selected view.</div>
+        <div class="map-note">Regional shading reflects the relative concentration of approved indicators for the selected view.</div>
       </div>
     `;
   }
@@ -147,10 +161,7 @@ window.PETSDemoComponents = (() => {
 
     return `
       <div class="breakdown-card card rise-in">
-        <div>
-          <div class="mini-section-title">Section title</div>
-          <h3 class="card-title">${escapeHtml(title)}</h3>
-        </div>
+        <h3 class="card-title">${escapeHtml(title)}</h3>
         <div class="donut-layout">
           <div class="donut-chart" style="background: conic-gradient(${stops});"></div>
           <div class="breakdown-list">
@@ -167,11 +178,12 @@ window.PETSDemoComponents = (() => {
   }
 
   function renderNav(screenIndex) {
+    const prevAction = screenIndex === 3 ? "back-to-before" : "prev-screen";
     const nextLabel = screenIndex === 5 ? "Restart Demo" : "Next";
     const nextAction = screenIndex === 5 ? "restart-demo" : "next-screen";
     return `
       <div class="nav-row">
-        <span></span>
+        <button class="ghost-button" data-action="${prevAction}">Back</button>
         <button class="secondary-button" data-action="${nextAction}">${nextLabel}</button>
       </div>
     `;
@@ -185,7 +197,6 @@ window.PETSDemoComponents = (() => {
     const rows = modal.rows.map((row) => `
       <tr>
         <td>${escapeHtml(row[0])}</td>
-        <td>${escapeHtml(row[1])}</td>
         <td>${escapeHtml(row[2])}</td>
         <td>${escapeHtml(row[3])}</td>
       </tr>
@@ -206,8 +217,7 @@ window.PETSDemoComponents = (() => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Repeat</th>
-                <th>Type</th>
+                <th>Signal</th>
                 <th>Priority</th>
               </tr>
             </thead>
@@ -222,6 +232,7 @@ window.PETSDemoComponents = (() => {
     escapeHtml,
     formatBody,
     priorityPill,
+    renderSidebar,
     renderTopbar,
     renderSignalsTable,
     renderMetrics,

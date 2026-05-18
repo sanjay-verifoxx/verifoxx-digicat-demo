@@ -8,8 +8,6 @@ window.PETSDemoScreens.screen6 = (useCase, state, components) => {
     <section class="screen-frame">
       ${components.renderTopbar({ screenNumber: 6, title: drilldown.title, useCaseKey: state.useCaseKey })}
       <div class="screen-content">
-        <div class="match-tag">Secure Match ID: ${components.escapeHtml(drilldown.matchId)}</div>
-
         <div class="drill-grid">
           <div class="card rise-in">
             <div class="mini-section-title">${components.escapeHtml(drilldown.leftTitle)}</div>
@@ -46,6 +44,7 @@ window.PETSDemoScreens.screen6 = (useCase, state, components) => {
 
         <div class="footer-banner">
           <strong>${components.escapeHtml(drilldown.footer)}</strong>
+          <div class="small-note">${components.escapeHtml(drilldown.dataBoundaryBody)}</div>
         </div>
 
         ${components.renderNav(5)}
