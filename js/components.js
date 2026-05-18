@@ -17,41 +17,32 @@ window.PETSDemoComponents = (() => {
     return `<span class="priority-pill ${key}">${escapeHtml(priority)}</span>`;
   }
 
-  function renderSidebar({ mode, useCaseKey, collapsed }) {
-    const interventionActive = mode === "use-case" && useCaseKey === "intervention" ? "is-active" : "";
-    const operationalActive = mode === "use-case" && useCaseKey === "operational" ? "is-active" : "";
-    const contactActive = mode === "contact" ? "is-active" : "";
-    const collapsedClass = collapsed ? "is-collapsed" : "";
-
-    return `
-      <aside class="sidebar ${collapsedClass}">
-        <button class="sidebar-toggle" data-action="toggle-sidebar" aria-label="${collapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${collapsed ? "false" : "true"}">
-          <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
-        </button>
-        ${collapsed ? "" : `
-          <div class="sidebar-nav">
-            <button class="sidebar-item ${interventionActive}" data-action="select-mode" data-mode="use-case" data-use-case="intervention">
-              <span class="sidebar-item-label">Identifying Vulnerable People</span>
-            </button>
-            <button class="sidebar-item ${operationalActive}" data-action="select-mode" data-mode="use-case" data-use-case="operational">
-              <span class="sidebar-item-label">Cross-Market Risk</span>
-            </button>
-            <button class="sidebar-item ${contactActive}" data-action="select-mode" data-mode="contact">
-              <span class="sidebar-item-label">Contact</span>
-            </button>
-          </div>
-        `}
-      </aside>
-    `;
+  function renderSidebar() {
+    // Preserved original left-rail toggle markup for later reuse:
+    // <button class="sidebar-toggle" data-action="toggle-sidebar" aria-label="${collapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${collapsed ? "false" : "true"}">
+    //   <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+    // </button>
+    return "";
   }
 
-  function renderTopbar({ title, showContactLink = true }) {
+  function renderTopbar({ title, showContactLink = true, useCaseKey = "intervention" }) {
+    const interventionActive = useCaseKey === "intervention" ? "is-active" : "";
+    const operationalActive = useCaseKey === "operational" ? "is-active" : "";
+
     return `
       <div class="topbar">
         <div class="topbar-left">
           <div class="screen-title">${escapeHtml(title)}</div>
         </div>
         <div class="topbar-right">
+          <div class="topbar-switch" aria-label="Use case navigation">
+            <button class="topbar-switch-button ${interventionActive}" data-action="select-mode" data-mode="use-case" data-use-case="intervention">
+              Early Intervention
+            </button>
+            <button class="topbar-switch-button ${operationalActive}" data-action="select-mode" data-mode="use-case" data-use-case="operational">
+              Cross-Market Risk
+            </button>
+          </div>
           ${showContactLink ? `
             <button class="topbar-link" data-action="select-mode" data-mode="contact">
               Contact us
@@ -146,7 +137,7 @@ window.PETSDemoComponents = (() => {
             data-layer="${escapeHtml(selectedLayer)}"
             data-title="${escapeHtml(title)}"
           >
-            <div class="map-loading">Loading UK regional map…</div>
+            <div class="map-loading">Loading UK regional map...</div>
           </div>
         </div>
         <div class="map-note">Regional shading reflects the relative concentration of approved indicators for the selected view.</div>
@@ -216,7 +207,7 @@ window.PETSDemoComponents = (() => {
               <h3 class="card-title">${escapeHtml(modal.title)}</h3>
               <div class="body-copy">${escapeHtml(modal.subtitle)}</div>
             </div>
-            <button class="close-button" data-action="close-modal" aria-label="Close">×</button>
+            <button class="close-button" data-action="close-modal" aria-label="Close">x</button>
           </div>
           <table class="signals-table modal-table">
             <thead>
