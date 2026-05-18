@@ -45,7 +45,7 @@ window.PETSDemoComponents = (() => {
           </div>
           ${showContactLink ? `
             <button class="topbar-link" data-action="select-mode" data-mode="contact">
-              Contact us
+              Contact Us
             </button>
           ` : ""}
           <div class="powered-by">Powered by <img class="powered-logo-image" src="assets/vfx-logo.png" alt="VFX logo"></div>
