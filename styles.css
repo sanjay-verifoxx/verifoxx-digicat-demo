@@ -1448,11 +1448,44 @@ body {
   margin-top: 4px;
 }
 
+.contact-submit-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+  box-shadow: none;
+}
+
 .form-note {
   margin: 0;
   max-width: 420px;
   font-size: 13px;
   color: var(--text-soft);
+}
+
+.form-status {
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.form-status.is-pending {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.16);
+  color: #2358b8;
+}
+
+.form-status.is-success {
+  background: rgba(33, 160, 103, 0.1);
+  border-color: rgba(33, 160, 103, 0.18);
+  color: #187a4e;
+}
+
+.form-status.is-error {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.16);
+  color: #be2f2f;
 }
 
 .modal-header {

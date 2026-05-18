@@ -193,6 +193,70 @@
     }
   }
 
+  function setContactFormFeedback(form, type, message) {
+    const statusEl = form.querySelector("[data-form-status]");
+    const submitButton = form.querySelector("[data-contact-submit]");
+    const submitLabel = form.querySelector("[data-submit-label]");
+
+    if (statusEl) {
+      if (message) {
+        statusEl.hidden = false;
+        statusEl.className = `form-status is-${type}`;
+        statusEl.textContent = message;
+      } else {
+        statusEl.hidden = true;
+        statusEl.className = "form-status";
+        statusEl.textContent = "";
+      }
+    }
+
+    if (submitButton) {
+      submitButton.disabled = type === "pending";
+    }
+
+    if (submitLabel) {
+      submitLabel.textContent = type === "pending" ? "Sending..." : "Send enquiry";
+    }
+  }
+
+  async function handleContactSubmit(form) {
+    const formData = new FormData(form);
+    const payload = new URLSearchParams();
+
+    for (const [key, value] of formData.entries()) {
+      payload.append(key, String(value));
+    }
+
+    setContactFormFeedback(form, "pending", "Sending your enquiry...");
+
+    try {
+      const response = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body: payload.toString()
+      });
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (error) {
+        result = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send your enquiry right now.");
+      }
+
+      form.reset();
+      setContactFormFeedback(form, "success", "Your enquiry has been sent. We'll be in touch soon.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to send your enquiry right now.";
+      setContactFormFeedback(form, "error", message);
+    }
+  }
+
   function getMapPalette(layer) {
     if (layer === "left") {
       return ["#edf4ff", "#2563eb"];
@@ -362,6 +426,16 @@
 
   root.addEventListener("click", (event) => {
     handleAction(event.target);
+  });
+
+  root.addEventListener("submit", (event) => {
+    const form = event.target.closest("[data-contact-form]");
+    if (!form) {
+      return;
+    }
+
+    event.preventDefault();
+    handleContactSubmit(form);
   });
 
   document.addEventListener("click", (event) => {
