@@ -58,6 +58,13 @@
     }
   }
 
+  function backToBefore() {
+    state.screenIndex = 1;
+    state.modal = null;
+    clearProcessingTimer();
+    render();
+  }
+
   function restartDemo() {
     state.screenIndex = 0;
     state.selectedLayer = "combined";
@@ -131,6 +138,9 @@
         break;
       case "prev-screen":
         prevScreen();
+        break;
+      case "back-to-before":
+        backToBefore();
         break;
       case "restart-demo":
         restartDemo();

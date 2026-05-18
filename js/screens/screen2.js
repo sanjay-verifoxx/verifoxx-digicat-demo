@@ -13,7 +13,6 @@ window.PETSDemoScreens.screen2 = (useCase, state, components) => {
             <h1 class="page-title">${components.escapeHtml(before.pageTitle)}</h1>
             <div class="page-subtitle">${components.escapeHtml(before.subtitle)}</div>
           </div>
-          <button class="table-filter" type="button">${components.escapeHtml(before.filter)} ▾</button>
         </div>
 
         <div class="split-grid">
@@ -35,7 +34,7 @@ window.PETSDemoScreens.screen2 = (useCase, state, components) => {
         </div>
 
         <div class="cta-row">
-          <span></span>
+          <button class="ghost-button" data-action="prev-screen">Back</button>
           <button class="primary-button" data-action="next-screen">Run Secure Collaboration →</button>
         </div>
       </div>

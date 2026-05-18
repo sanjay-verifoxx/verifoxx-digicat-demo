@@ -82,7 +82,7 @@ window.PETSDemoData = {
           "Generating intervention insights"
         ],
         footerTitle: "Your data remains secure.",
-        footerBody: "Only approved, privacy-safe insights are generated."
+        footerBody: "Only approved, privacy-safe insights are generated. Data stays within each organisation's own secure environment."
       },
       after: {
         title: "AFTER PETs — Joined-Up Intervention Insights",
@@ -150,7 +150,6 @@ window.PETSDemoData = {
       },
       match: {
         title: "SECURE MATCH EXPLANATION — Why This Person Was Highlighted",
-        matchId: "MATCH-001",
         beforeLabel: "Before PETs",
         leftTitle: "Health Service sees:",
         leftBody: "3 injury-related emergency visits in 6 weeks",
@@ -170,11 +169,12 @@ window.PETSDemoData = {
         whyTitle: "Why this matters",
         whyBody: "The joined-up view suggests escalating vulnerability that was not obvious from either dataset alone.",
         privacyTitle: "Privacy note",
-        privacyBody: "Personal identifiers remain protected. Only approved indicators are connected."
+        privacyBody: "Personal identifiers remain protected. Only approved indicators are connected.",
+        dataBoundaryTitle: "Data stays within each organisation's environment",
+        dataBoundaryBody: "Underlying records do not leave the organisation that holds them. Only approved indicators are used to generate the joined-up view."
       },
       drilldown: {
         title: "VIEW INDICATORS BEHIND THIS MATCH",
-        matchId: "MATCH-001",
         leftTitle: "Health Service indicator",
         leftBody: "3 injury-related emergency visits in 6 weeks",
         leftPriority: "Medium",
@@ -194,7 +194,8 @@ window.PETSDemoData = {
         ],
         resultTitle: "Result",
         resultBody: "The combined picture supports a coordinated safeguarding review.",
-        footer: "All personal identifiers remain protected at all times."
+        footer: "All personal identifiers remain protected at all times.",
+        dataBoundaryBody: "Underlying records remain within each organisation's own environment throughout the matching process."
       }
     },
     operational: {
@@ -280,7 +281,7 @@ window.PETSDemoData = {
           "Generating operational risk insights"
         ],
         footerTitle: "Operational data remains secure.",
-        footerBody: "Only approved, resilience-focused insights are generated."
+        footerBody: "Only approved, resilience-focused insights are generated. Data stays within each organisation's own secure environment."
       },
       after: {
         title: "AFTER PETs — Joined-Up Cross-Market Insights",
@@ -348,7 +349,6 @@ window.PETSDemoData = {
       },
       match: {
         title: "SECURE MATCH EXPLANATION — Why This Cross-Market Risk Was Highlighted",
-        matchId: "MATCH-EW-001",
         beforeLabel: "Before PETs",
         leftTitle: "Energy Network Operator sees:",
         leftBody: "Repeated local supply dips in a network zone",
@@ -368,11 +368,12 @@ window.PETSDemoData = {
         whyTitle: "Why this matters",
         whyBody: "The joined-up view suggests that a local energy supply issue could affect a water asset that supports service continuity.",
         privacyTitle: "Sensitivity note",
-        privacyBody: "Sensitive infrastructure details remain protected. Only approved operational indicators are connected."
+        privacyBody: "Sensitive infrastructure details remain protected. Only approved operational indicators are connected.",
+        dataBoundaryTitle: "Operational data stays within each organisation's environment",
+        dataBoundaryBody: "Asset records and operational system details remain with the organisation that owns them. Only approved indicators contribute to the joined-up resilience view."
       },
       drilldown: {
         title: "VIEW INDICATORS BEHIND THIS CROSS-MARKET MATCH",
-        matchId: "MATCH-EW-001",
         leftTitle: "Energy Network indicator",
         leftBody: "Repeated local supply dips in a network zone",
         leftPriority: "Medium",
@@ -392,7 +393,8 @@ window.PETSDemoData = {
         ],
         resultTitle: "Result",
         resultBody: "The combined picture supports a joint resilience review.",
-        footer: "Sensitive operational data remains protected at all times."
+        footer: "Sensitive operational data remains protected at all times.",
+        dataBoundaryBody: "Operational records remain within each organisation's own environment while approved indicators are matched."
       }
     }
   }

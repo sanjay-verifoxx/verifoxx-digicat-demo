@@ -23,7 +23,6 @@ window.PETSDemoComponents = (() => {
     return `
       <div class="topbar">
         <div class="topbar-left">
-          <span class="step-chip">${screenNumber}/6</span>
           <div class="screen-title">${escapeHtml(title)}</div>
         </div>
         <div class="topbar-right">
@@ -41,7 +40,6 @@ window.PETSDemoComponents = (() => {
     const rows = org.rows.map((row) => `
       <tr>
         <td>${escapeHtml(row[0])}</td>
-        <td>${escapeHtml(row[1])}</td>
         <td>${escapeHtml(row[2])}</td>
         <td>${priorityPill(row[3])}</td>
       </tr>
@@ -62,17 +60,12 @@ window.PETSDemoComponents = (() => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Repeat</th>
-              <th>Type</th>
+              <th>Signal</th>
               <th>Priority</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
         </table>
-        <div class="card-footer">
-          <strong>${escapeHtml(org.footer)}</strong>
-          <button class="text-link" data-action="open-signals" data-org="${escapeHtml(org.name)}">View Example Signals</button>
-        </div>
       </div>
     `;
   }
@@ -104,7 +97,6 @@ window.PETSDemoComponents = (() => {
       <div class="map-card card rise-in">
         <div class="map-toolbar">
           <div>
-            <div class="mini-section-title">Section title</div>
             <h3 class="card-title">${escapeHtml(title)}</h3>
           </div>
           <div class="toggle-row" aria-label="Map layer toggle">
@@ -147,10 +139,7 @@ window.PETSDemoComponents = (() => {
 
     return `
       <div class="breakdown-card card rise-in">
-        <div>
-          <div class="mini-section-title">Section title</div>
-          <h3 class="card-title">${escapeHtml(title)}</h3>
-        </div>
+        <h3 class="card-title">${escapeHtml(title)}</h3>
         <div class="donut-layout">
           <div class="donut-chart" style="background: conic-gradient(${stops});"></div>
           <div class="breakdown-list">
@@ -167,11 +156,12 @@ window.PETSDemoComponents = (() => {
   }
 
   function renderNav(screenIndex) {
+    const prevAction = screenIndex === 3 ? "back-to-before" : "prev-screen";
     const nextLabel = screenIndex === 5 ? "Restart Demo" : "Next";
     const nextAction = screenIndex === 5 ? "restart-demo" : "next-screen";
     return `
       <div class="nav-row">
-        <span></span>
+        <button class="ghost-button" data-action="${prevAction}">Back</button>
         <button class="secondary-button" data-action="${nextAction}">${nextLabel}</button>
       </div>
     `;
@@ -185,7 +175,6 @@ window.PETSDemoComponents = (() => {
     const rows = modal.rows.map((row) => `
       <tr>
         <td>${escapeHtml(row[0])}</td>
-        <td>${escapeHtml(row[1])}</td>
         <td>${escapeHtml(row[2])}</td>
         <td>${escapeHtml(row[3])}</td>
       </tr>
@@ -206,8 +195,7 @@ window.PETSDemoComponents = (() => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Repeat</th>
-                <th>Type</th>
+                <th>Signal</th>
                 <th>Priority</th>
               </tr>
             </thead>

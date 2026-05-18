@@ -14,7 +14,6 @@ window.PETSDemoScreens.screen4 = (useCase, state, components) => {
             <h1 class="page-title">${components.escapeHtml(after.pageTitle)}</h1>
             <div class="page-subtitle">${components.escapeHtml(after.subtitle)}</div>
           </div>
-          <button class="table-filter" type="button">${components.escapeHtml(after.filter)} ▾</button>
         </div>
 
         ${components.renderMetrics(after.metrics)}
