@@ -235,6 +235,27 @@ body {
   gap: 14px;
 }
 
+.topbar-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+
+.topbar-link:hover,
+.topbar-link:focus-visible {
+  outline: none;
+  color: var(--brand);
+}
+
 .screen-title {
   font-size: 18px;
   font-weight: 800;
@@ -242,6 +263,9 @@ body {
 }
 
 .powered-by {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   font-size: 13px;
   color: var(--text-soft);
 }
@@ -1011,11 +1035,12 @@ body {
   min-height: 460px;
   display: grid;
   gap: 18px;
+  align-content: start;
 }
 
 .map-toolbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
@@ -1111,7 +1136,7 @@ body {
   min-height: 460px;
   display: grid;
   gap: 18px;
-  align-content: center;
+  align-content: start;
 }
 
 .donut-layout {
@@ -1122,7 +1147,7 @@ body {
   gap: 28px;
   max-width: 620px;
   width: 100%;
-  margin: 0 auto;
+  margin: 18px auto 0;
 }
 
 .donut-chart {

@@ -45,13 +45,18 @@ window.PETSDemoComponents = (() => {
     `;
   }
 
-  function renderTopbar({ title }) {
+  function renderTopbar({ title, showContactLink = true }) {
     return `
       <div class="topbar">
         <div class="topbar-left">
           <div class="screen-title">${escapeHtml(title)}</div>
         </div>
         <div class="topbar-right">
+          ${showContactLink ? `
+            <button class="topbar-link" data-action="select-mode" data-mode="contact">
+              Contact us
+            </button>
+          ` : ""}
           <div class="powered-by">Powered by <img class="powered-logo-image" src="assets/vfx-logo.png" alt="VFX logo"></div>
         </div>
       </div>
