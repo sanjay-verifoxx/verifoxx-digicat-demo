@@ -2,7 +2,6 @@ window.PETSDemoScreens = window.PETSDemoScreens || {};
 
 window.PETSDemoScreens.contact = (state, components) => `
   <section class="screen-frame">
-    ${components.renderTopbar({ title: "Contact" })}
     <div class="screen-content contact-screen-content">
       <div class="contact-layout">
         <div class="contact-intro card rise-in">
