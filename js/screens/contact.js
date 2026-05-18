@@ -28,7 +28,7 @@ window.PETSDemoScreens.contact = (state, components) => `
         </div>
 
         <div class="contact-form-card card rise-in">
-          <form class="contact-form" name="contact" method="POST" data-netlify="true">
+          <form class="contact-form" name="contact" method="POST" data-netlify="true" data-contact-form>
             <input type="hidden" name="form-name" value="contact">
             <input type="hidden" name="subject" value="Verifoxx demo contact enquiry">
 
@@ -69,8 +69,11 @@ window.PETSDemoScreens.contact = (state, components) => `
 
             <div class="contact-actions">
               <p class="form-note">We will only use these details to respond to your enquiry.</p>
-              <button class="primary-button" type="submit">Send enquiry</button>
+              <button class="primary-button contact-submit-button" type="submit" data-contact-submit>
+                <span data-submit-label>Send enquiry</span>
+              </button>
             </div>
+            <div class="form-status" data-form-status hidden></div>
           </form>
         </div>
       </div>
