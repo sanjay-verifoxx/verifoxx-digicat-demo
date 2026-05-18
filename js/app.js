@@ -10,8 +10,10 @@
   ];
 
   const state = {
+    mode: "use-case",
     useCaseKey: "intervention",
     screenIndex: 0,
+    sidebarCollapsed: true,
     selectedLayer: "combined",
     processingProgress: 0,
     modal: null
@@ -26,12 +28,35 @@
   }
 
   function setUseCase(key) {
+    state.mode = "use-case";
     state.useCaseKey = key;
     state.screenIndex = 0;
+    state.sidebarCollapsed = true;
     state.selectedLayer = "combined";
     state.processingProgress = 0;
     state.modal = null;
     clearProcessingTimer();
+    render();
+  }
+
+  function setMode(mode, useCaseKey) {
+    clearProcessingTimer();
+    state.modal = null;
+    state.sidebarCollapsed = true;
+
+    if (mode === "contact") {
+      state.mode = "contact";
+      render();
+      return;
+    }
+
+    state.mode = "use-case";
+    if (useCaseKey && useCaseKey !== state.useCaseKey) {
+      state.useCaseKey = useCaseKey;
+      state.screenIndex = 0;
+      state.selectedLayer = "combined";
+      state.processingProgress = 0;
+    }
     render();
   }
 
@@ -132,6 +157,13 @@
     switch (action) {
       case "select-use-case":
         setUseCase(actionEl.getAttribute("data-use-case"));
+        break;
+      case "select-mode":
+        setMode(actionEl.getAttribute("data-mode"), actionEl.getAttribute("data-use-case"));
+        break;
+      case "toggle-sidebar":
+        state.sidebarCollapsed = !state.sidebarCollapsed;
+        render();
         break;
       case "next-screen":
         nextScreen();
@@ -307,8 +339,24 @@
 
   function render() {
     const screenKey = screenKeys[state.screenIndex];
-    const template = screens[screenKey];
-    root.innerHTML = template(currentUseCase(), state, components) + components.renderModal(state.modal);
+    const template = state.mode === "contact" ? screens.contact : screens[screenKey];
+    const content = state.mode === "contact"
+      ? template(state, components)
+      : template(currentUseCase(), state, components);
+
+    root.innerHTML = `
+      <div class="app-layout ${state.sidebarCollapsed ? "sidebar-collapsed" : ""}">
+        ${components.renderSidebar({
+          mode: state.mode,
+          useCaseKey: state.useCaseKey,
+          collapsed: state.sidebarCollapsed
+        })}
+        <main class="app-main">
+          ${content}
+        </main>
+      </div>
+      ${components.renderModal(state.modal)}
+    `;
     renderChoroplethMap();
   }
 

@@ -50,6 +50,138 @@ body {
   margin: 0 auto;
 }
 
+.app-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  align-items: start;
+  position: relative;
+}
+
+.app-main {
+  min-width: 0;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -92px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  width: 84px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: width 180ms ease, transform 180ms ease;
+  z-index: 4;
+}
+
+.sidebar.is-collapsed {
+  width: 84px;
+}
+
+.sidebar:not(.is-collapsed) {
+  width: 220px;
+}
+
+.sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.sidebar-toggle:hover,
+.sidebar-toggle:focus-visible {
+  outline: none;
+  background: transparent;
+}
+
+.sidebar-toggle-icon {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.sidebar.is-collapsed .sidebar-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.sidebar.is-collapsed .sidebar-toggle:hover,
+.sidebar.is-collapsed .sidebar-toggle:focus-visible {
+  background: transparent;
+}
+
+.sidebar.is-collapsed .sidebar-toggle-icon {
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 14px 16px 16px;
+  border-top: 1px dashed rgba(109, 94, 245, 0.28);
+  border-radius: 0 0 20px 20px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(40, 53, 113, 0.035);
+  backdrop-filter: blur(12px);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-soft);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+
+.sidebar-item:hover,
+.sidebar-item:focus-visible {
+  color: var(--text);
+  outline: none;
+}
+
+.sidebar-item.is-active {
+  color: var(--brand);
+}
+
+.sidebar-item-label {
+  display: block;
+  line-height: 1.25;
+}
+
+.app-layout.sidebar-collapsed .sidebar {
+  top: 0;
+  left: -92px;
+}
+
+.app-layout:not(.sidebar-collapsed) .sidebar {
+  top: 0;
+  left: -92px;
+}
+
 .screen-frame {
   position: relative;
   overflow: hidden;
@@ -131,42 +263,6 @@ body {
 
 .brand-v {
   color: var(--brand);
-}
-
-.use-case-switcher {
-  display: inline-flex;
-  gap: 8px;
-  padding: 6px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px);
-}
-
-.switch-pill {
-  border: 0;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-soft);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 180ms ease;
-}
-
-.switch-pill:hover,
-.switch-pill:focus-visible {
-  color: var(--text);
-  background: rgba(79, 70, 229, 0.08);
-  outline: none;
-}
-
-.switch-pill.is-active {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.14), rgba(109, 94, 245, 0.16));
-  color: var(--brand);
-  box-shadow: inset 0 0 0 1px rgba(97, 88, 243, 0.16);
 }
 
 .screen-content {
@@ -1229,6 +1325,136 @@ body {
   box-shadow: 0 28px 70px rgba(10, 16, 39, 0.24);
 }
 
+.contact-screen-content {
+  min-height: calc(100vh - 180px);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.contact-intro,
+.contact-form-card {
+  min-height: 100%;
+}
+
+.contact-intro {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  padding: 30px;
+}
+
+.contact-highlights {
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.contact-highlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+.contact-highlight-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-3));
+  box-shadow: 0 0 0 5px rgba(94, 92, 230, 0.08);
+}
+
+.contact-form-card {
+  padding: 30px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  gap: 16px;
+}
+
+.form-row.two-up {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-field {
+  display: grid;
+  gap: 10px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.form-input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1px solid rgba(148, 164, 211, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.56);
+  color: var(--text);
+  font: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.form-input::placeholder {
+  color: rgba(86, 97, 127, 0.7);
+}
+
+.form-input:hover {
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgba(94, 92, 230, 0.42);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 4px rgba(94, 92, 230, 0.08);
+}
+
+.form-select {
+  appearance: none;
+}
+
+.form-textarea {
+  min-height: 160px;
+  padding: 16px;
+  resize: vertical;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.form-note {
+  margin: 0;
+  max-width: 420px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
 .modal-header {
   display: flex;
   align-items: flex-start;
@@ -1278,11 +1504,25 @@ body {
 }
 
 @media (max-width: 1180px) {
+  .app-layout,
+  .app-layout.sidebar-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+  }
+
   .hero-grid,
   .after-grid,
   .split-grid,
   .detail-grid,
   .drill-grid,
+  .contact-layout,
   .limitations-grid,
   .why-grid,
   .comparison-columns,
@@ -1318,6 +1558,23 @@ body {
     min-height: auto;
     padding: 16px;
     border-radius: 24px;
+  }
+
+  .sidebar {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .sidebar-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row.two-up {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-actions {
+    display: grid;
   }
 
   .topbar,

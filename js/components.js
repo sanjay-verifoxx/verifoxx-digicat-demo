@@ -17,19 +17,41 @@ window.PETSDemoComponents = (() => {
     return `<span class="priority-pill ${key}">${escapeHtml(priority)}</span>`;
   }
 
-  function renderTopbar({ screenNumber, title, useCaseKey }) {
-    const interventionActive = useCaseKey === "intervention" ? "is-active" : "";
-    const operationalActive = useCaseKey === "operational" ? "is-active" : "";
+  function renderSidebar({ mode, useCaseKey, collapsed }) {
+    const interventionActive = mode === "use-case" && useCaseKey === "intervention" ? "is-active" : "";
+    const operationalActive = mode === "use-case" && useCaseKey === "operational" ? "is-active" : "";
+    const contactActive = mode === "contact" ? "is-active" : "";
+    const collapsedClass = collapsed ? "is-collapsed" : "";
+
+    return `
+      <aside class="sidebar ${collapsedClass}">
+        <button class="sidebar-toggle" data-action="toggle-sidebar" aria-label="${collapsed ? "Expand navigation" : "Collapse navigation"}" aria-expanded="${collapsed ? "false" : "true"}">
+          <span class="sidebar-toggle-icon" aria-hidden="true">☰</span>
+        </button>
+        ${collapsed ? "" : `
+          <div class="sidebar-nav">
+            <button class="sidebar-item ${interventionActive}" data-action="select-mode" data-mode="use-case" data-use-case="intervention">
+              <span class="sidebar-item-label">Identifying Vulnerable People</span>
+            </button>
+            <button class="sidebar-item ${operationalActive}" data-action="select-mode" data-mode="use-case" data-use-case="operational">
+              <span class="sidebar-item-label">Cross-Market Risk</span>
+            </button>
+            <button class="sidebar-item ${contactActive}" data-action="select-mode" data-mode="contact">
+              <span class="sidebar-item-label">Contact</span>
+            </button>
+          </div>
+        `}
+      </aside>
+    `;
+  }
+
+  function renderTopbar({ title }) {
     return `
       <div class="topbar">
         <div class="topbar-left">
           <div class="screen-title">${escapeHtml(title)}</div>
         </div>
         <div class="topbar-right">
-          <div class="use-case-switcher" aria-label="Choose use case">
-            <button class="switch-pill ${interventionActive}" data-action="select-use-case" data-use-case="intervention">Identifying Vulnerable People</button>
-            <button class="switch-pill ${operationalActive}" data-action="select-use-case" data-use-case="operational">Cross-Market Risk</button>
-          </div>
           <div class="powered-by">Powered by <img class="powered-logo-image" src="assets/vfx-logo.png" alt="VFX logo"></div>
         </div>
       </div>
@@ -210,6 +232,7 @@ window.PETSDemoComponents = (() => {
     escapeHtml,
     formatBody,
     priorityPill,
+    renderSidebar,
     renderTopbar,
     renderSignalsTable,
     renderMetrics,
