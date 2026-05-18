@@ -117,9 +117,9 @@ window.PETSDemoComponents = (() => {
         </div>
         <div class="heatmap-wrap">
           <div class="heatmap-scale">
-            <div class="legend-label">High</div>
+            <div class="legend-label">Higher</div>
             <div class="scale-bar"></div>
-            <div class="legend-label">Low</div>
+            <div class="legend-label">Lower</div>
           </div>
           <div
             class="uk-map-shell"
@@ -130,7 +130,7 @@ window.PETSDemoComponents = (() => {
             <div class="map-loading">Loading UK regional map…</div>
           </div>
         </div>
-        <div class="map-note">Heat intensity is shown as a presentation-ready hotspot overlay for the selected view.</div>
+        <div class="map-note">Regional shading reflects the relative concentration of approved indicators for the selected view.</div>
       </div>
     `;
   }

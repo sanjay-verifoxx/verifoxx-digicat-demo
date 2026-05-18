@@ -153,12 +153,44 @@
 
   function getMapPalette(layer) {
     if (layer === "left") {
-      return ["#e7f0ff", "#2f6ff2"];
+      return ["#edf4ff", "#2563eb"];
     }
     if (layer === "right") {
-      return ["#e8f7ef", "#2bb673"];
+      return ["#edf9f2", "#1f9d68"];
     }
-    return ["#ebe7ff", "#6957f5"];
+    return ["#f1ecff", "#5b48f5"];
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function getRegionValues(useCase, layer) {
+    const left = useCase.after.regions.left || {};
+    const right = useCase.after.regions.right || {};
+
+    if (layer === "left") {
+      return left;
+    }
+
+    if (layer === "right") {
+      return right;
+    }
+
+    const codes = new Set([...Object.keys(left), ...Object.keys(right)]);
+    const combined = {};
+
+    for (const code of codes) {
+      const leftValue = left[code] ?? 0;
+      const rightValue = right[code] ?? 0;
+      const overlap = Math.min(leftValue, rightValue);
+      const imbalancePenalty = Math.abs(leftValue - rightValue) * 0.08;
+      const synergyBonus = overlap > 0.32 ? 0.16 + overlap * 0.12 : overlap * 0.08;
+      const weighted = (leftValue * 0.46) + (rightValue * 0.46) + synergyBonus - imbalancePenalty;
+      combined[code] = clamp(Number(weighted.toFixed(3)), 0.08, 0.95);
+    }
+
+    return combined;
   }
 
   function normalizeUkFeatures() {
@@ -214,7 +246,7 @@
 
     const useCase = currentUseCase();
     const layer = state.selectedLayer;
-    const regionValues = useCase.after.regions[layer] || {};
+    const regionValues = getRegionValues(useCase, layer);
     const [lightColor, strongColor] = getMapPalette(layer);
 
     normalizeUkFeatures().then((geojson) => {
@@ -255,7 +287,8 @@
         .append("title")
         .text((feature) => {
           const score = regionValues[feature.properties.regionCode] ?? 0.12;
-          return `${feature.properties.regionName}: ${Math.round(score * 100)} intensity`;
+          const label = layer === "combined" ? "joined-up signal score" : "approved indicator score";
+          return `${feature.properties.regionName}: ${Math.round(score * 100)} ${label}`;
         });
     }).catch(() => {
       container.innerHTML = '<div class="map-loading">Unable to load the UK boundary layer right now.</div>';
