@@ -125,7 +125,7 @@ body {
   width: auto;
   max-width: 300px;
   vertical-align: middle;
-  margin-left: 30px;
+  margin-left: 8px;
   object-fit: contain;
 }
 
@@ -224,6 +224,12 @@ body {
   padding: 20px;
 }
 
+.story-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .footer-banner {
   padding: 18px 22px;
   background: linear-gradient(180deg, rgba(94, 92, 230, 0.07), rgba(255,255,255,0.82));
@@ -233,7 +239,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 22px;
   color: var(--brand);
   font-size: 12px;
   font-weight: 800;
@@ -250,8 +256,8 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(42px, 5vw, 62px);
-  line-height: 0.96;
+  font-size: clamp(20px, 2.8vw, 38px);
+  line-height: 1.02;
 }
 
 .page-title {
@@ -285,16 +291,17 @@ body {
 }
 
 .hero-copy {
-  max-width: 46ch;
-  margin: 16px 0 14px;
+  max-width: none;
+  margin: 28px 0 14px;
   font-size: 18px;
 }
 
 .supporting-callout {
-  display: inline-flex;
+  display: flex;
   align-items: flex-start;
   gap: 14px;
-  max-width: 36ch;
+  width: 100%;
+  margin-top: auto;
   padding: 14px 16px;
   border-radius: var(--radius-md);
   background: linear-gradient(180deg, rgba(94, 92, 230, 0.06), rgba(255,255,255,0.78));
@@ -303,6 +310,7 @@ body {
 
 .supporting-callout .icon-badge {
   margin-top: 2px;
+  flex: 0 0 auto;
 }
 
 .icon-badge {

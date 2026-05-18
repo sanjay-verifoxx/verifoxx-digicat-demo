@@ -27,7 +27,7 @@ window.PETSDemoComponents = (() => {
         </div>
         <div class="topbar-right">
           <div class="use-case-switcher" aria-label="Choose use case">
-            <button class="switch-pill ${interventionActive}" data-action="select-use-case" data-use-case="intervention">Early Intervention</button>
+            <button class="switch-pill ${interventionActive}" data-action="select-use-case" data-use-case="intervention">Identifying Vulnerable People</button>
             <button class="switch-pill ${operationalActive}" data-action="select-use-case" data-use-case="operational">Cross-Market Risk</button>
           </div>
           <div class="powered-by">Powered by <img class="powered-logo-image" src="assets/vfx-logo.png" alt="VFX logo"></div>

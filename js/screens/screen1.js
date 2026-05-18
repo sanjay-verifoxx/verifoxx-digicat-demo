@@ -11,7 +11,7 @@ window.PETSDemoScreens.screen1 = (useCase, state, components) => {
       <div class="screen-content">
         <div class="hero-grid">
           <div class="story-card rise-in">
-            <div class="eyebrow">Educational demo flow</div>
+            <div class="eyebrow">${components.escapeHtml(landing.eyebrow || "Use Case")}</div>
             <h1 class="hero-title">${components.escapeHtml(landing.heroTitle)}</h1>
             <p class="hero-copy">${components.escapeHtml(landing.heroDescription)}</p>
             <div class="supporting-callout">
