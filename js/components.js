@@ -37,10 +37,10 @@ window.PETSDemoComponents = (() => {
         <div class="topbar-right">
           <div class="topbar-switch" aria-label="Use case navigation">
             <button class="topbar-switch-button ${interventionActive}" data-action="select-mode" data-mode="use-case" data-use-case="intervention">
-              Early Intervention
+              Use Case #1
             </button>
             <button class="topbar-switch-button ${operationalActive}" data-action="select-mode" data-mode="use-case" data-use-case="operational">
-              Cross-Market Risk
+              Use Case #2
             </button>
           </div>
           ${showContactLink ? `
